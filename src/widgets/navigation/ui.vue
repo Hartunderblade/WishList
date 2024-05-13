@@ -1,23 +1,40 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<template>
-  <header class="container" style="background: #000; color: #ffff;">
-    <nav class="" style="padding: 20px 0; display: flex; ">
-      <div style="display:flex; align-items: center;">
-        <h1>Логотип</h1>
-      </div>
-      <ul style="display: flex; justify-content: end; gap: 10px;">
-        <RouterLink to="/home">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <li style="cursor: pointer;">Выход</li>
-      </ul>
-    </nav>
-  </header>
-</template>
-
 <script setup>
 
 </script>
 
-<style lang="scss">
+<template>
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-img">
+        <img src="@/app/img/Logo.svg" alt="">
+      </div>
+      <div class="nav-links">
+        <RouterLink class="nav-links__ref" to="/">Home</RouterLink>
+        <RouterLink class="nav-links__ref" to="/login">Login</RouterLink>
+      </div>
+    </nav>
+  </header>
+</template>
 
+<style scoped lang="scss">
+  .header{
+    .nav{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin: 30px 0;
+
+      &-links{
+        display: flex;
+        column-gap: 24px;
+
+        &__ref{
+          font-size: 20px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
 </style>

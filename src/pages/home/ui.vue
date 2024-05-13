@@ -1,7 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <!-- <h1>Home</h1> -->
-    <div></div>
+  <section>
+    <h1>Home</h1>
+  </section>
+   
   </template>
   
   <script setup>

@@ -1,12 +1,98 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<script setup>
+import { ref } from "vue";
+
+const email = ref(null);  
+const password = ref(null);   
+const errorMsg = ref(null);  
+</script>
+
 <template>
-    <h1>Вход</h1>
+    <div class="login">
+    <!-- error handling -->
+    <!-- <div v-if="errorMsg" style="margin-bottom: 10px; padding: 4px; background: #e1e1e1;">
+      <p style="color: red;">{{ errorMsg }}</p>
+    </div> -->
+
+    <!-- login -->
+    <form class="form">
+      <h2 class="form__title">Вход</h2>
+      <div class="form-input">
+        <label for="email"></label>
+        <input type="text" required id="email" v-model="email" placeholder="Почта">
+      </div>
+      <div class="form-input">
+        <label for="password"></label>
+        <input type="password" required id="password" v-model="password" placeholder="Пароль">
+      </div>
+      <div>
+        <button class="form__button">Войти</button>
+      </div>
+      <RouterLink class="form-text" to="/register">У вас нет аккаунта?<span class="form-text__link"> Зарегистрируйтесь</span></RouterLink>
+    </form>
+  </div>
   </template>
   
-  <script setup>
   
-  </script>
-  
-  <style lang="scss">
-  
+  <style scoped lang="scss">
+    .login{
+    display: flex;
+      // flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    .form{
+      background-color: #fff;
+      padding: 100px 60px;
+      border-radius: 40px;
+
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+
+      &__title{
+        font-weight: 600;
+        font-size: 34px;
+
+        margin-bottom: 20px;
+      }
+
+      &-input{
+        input{
+          border: 1px solid rgba(144, 98, 255, 0.7);
+          border-radius: 79px;
+          width: 399px;
+          height: 67px;
+          padding: 24px 20px;
+          font-size: 14px;
+
+          outline-color: rgba(123, 70, 246, 0.7);
+        }
+      }
+
+      &__button{
+        border-radius: 85px;
+        padding: 20px 166px;
+
+        font-weight: 600;
+        font-size: 22px;
+        color: #fff;
+
+        background-color: #796dff;
+
+        margin-top: 10px;
+      }
+
+      &-text{
+        font-size: 16px;
+        font-weight: 500;
+
+        &__link{
+          // font-size: 18px;
+          font-weight: 600;
+          color: #796dff;
+        }
+      }
+    }
+  }
   </style>

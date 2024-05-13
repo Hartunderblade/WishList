@@ -4,10 +4,10 @@ import Navigation from '@/widgets/navigation/ui.vue'
 </script>
 
 <template>
-  <div style="min-height: 100%; box-sizing: border-box;">
+  <main class="container">
     <Navigation/>
     <RouterView />
-  </div>
+  </main>
   <!-- <header>
     <div class="wrapper">
 
