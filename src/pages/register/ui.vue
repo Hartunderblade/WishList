@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from "vue";
+import Slider from '@/widgets/Slider/ui.vue';
 
   const email = ref(null);  
   const login = ref(null);  
@@ -15,6 +16,12 @@ import { ref } from "vue";
     <!-- <div v-if="errorMsg" style="margin-bottom: 10px; padding: 4px; background: #e1e1e1;">
       <p style="color: red;">{{ errorMsg }}</p>
     </div> -->
+
+    <!-- слайдер -->
+
+    <div>
+      <Slider/>
+    </div>
 
     <!-- register -->
     <form class="form">
@@ -46,19 +53,40 @@ import { ref } from "vue";
 
 <style scoped lang="scss">
   .register{
-    display: flex;
-      // flex-direction: column;
-      justify-content: center;
+    // display: flex;
+    //   // flex-direction: column;
+    //   justify-content: center;
+    //   align-items: center;
+    //   text-align: center;
+
+
+
+      display: flex;
+      justify-content: center;  
       align-items: center;
       text-align: center;
-    .form{
+
+      // column-gap: 32px;
+
       background-color: #fff;
-      padding: 100px 60px;
-      border-radius: 40px;
+
+      padding: 30px 0 30px 30px;
+
+      border-radius: 40px ;
+
+      width: 1120px;
+
+      margin: 0 auto;
+    .form{
+      // background-color: #fff;
+      padding: 0 60px;
+      // border-radius: 40px;
 
       display: flex;
       flex-direction: column;
       row-gap: 20px;
+
+      // margin-left: 40px;
 
       &__title{
         font-weight: 600;
@@ -69,7 +97,7 @@ import { ref } from "vue";
 
       &-input{
         input{
-          border: 1px solid rgba(144, 98, 255, 0.7);
+          border: 1px solid rgba(176, 144, 252, 0.7);
           border-radius: 79px;
           width: 399px;
           height: 67px;
