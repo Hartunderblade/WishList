@@ -1,3 +1,5 @@
+https://vueschool.io/articles/vuejs-tutorials/use-supabase-auth-with-vue-js-3/
+
 <h1>https://www.youtube.com/watch?v=3tF0fGkd4ho</h1>
 
 база
