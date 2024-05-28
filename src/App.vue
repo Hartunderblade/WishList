@@ -5,7 +5,7 @@ import Navigation from '@/widgets/navigation/ui.vue'
 
 <template>
   <main class="container">
-    <Navigation/>
+    <!-- <Navigation/> -->
     <RouterView />
   </main>
   <!-- <header>

@@ -1,19 +1,77 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from "vue";
+import { supabase } from '@/supabase/init.js';
+// import router from 'vue';
+import { useRouter } from 'vue-router';
 import Slider from '@/widgets/Slider/ui.vue';
 
-const email = ref(null);  
-const password = ref(null);   
-const errorMsg = ref(null);  
+const router = useRouter();
+const email = ref("");  
+// const login = ref("");  
+const password = ref("");  
+
+
+const handleSignin = async () => {
+  try{
+    const {error} = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value
+    })
+    if(error) throw error
+    router.push({ name: 'home' })
+
+  }catch(error){
+    alert(error.message)
+  }
+}
+
+//login function
+
+// const login = async () => {
+//   try{
+//     const { error } = await supabase.auth.signIn({
+//       email: email.value,
+//       password: password.value,
+//     });
+//     if(error) throw error;
+//     router.push({ name: 'Home' })
+//   }
+//   catch(error){
+//     errorMsg.value = `Error: ${error.message}`;
+//     setTimeout( () => {
+//       errorMsg.value = null;
+//     }, 5000);
+//   }
+//   return;
+// };
+
+
+// const login = async () => {
+//       try {
+//         const { error } = await supabase.auth.signIn({
+//           email: email.value,
+//           password: password.value,
+//         });
+//         if (error) throw error;
+//         router.push({ name: "Home" });
+//       } catch (error) {
+//         errorMsg.value = `Error: ${error.message}`;
+//         setTimeout(() => {
+//           errorMsg.value = null;
+//         }, 5000);
+//       }
+//       return;
+// };
+
 </script>
 
 <template>
     <section class="login">
     <!-- error handling -->
-    <!-- <div v-if="errorMsg" style="margin-bottom: 10px; padding: 4px; background: #e1e1e1;">
+    <div v-if="errorMsg" style="margin-bottom: 10px; padding: 4px; background: #e1e1e1;">
       <p style="color: red;">{{ errorMsg }}</p>
-    </div> -->
+    </div>
 
     <!-- сдайдер -->
 
@@ -22,7 +80,9 @@ const errorMsg = ref(null);
     </div>
 
     <!-- login -->
-    <form class="form">
+    <form
+      @submit.prevent="handleSignin"
+      class="form">
       <h2 class="form__title">Вход</h2>
       <div class="form-input">
         <label for="email"></label>
@@ -33,7 +93,7 @@ const errorMsg = ref(null);
         <input type="password" required id="password" v-model="password" placeholder="Пароль">
       </div>
       <div>
-        <button class="form__button">Войти</button>
+        <button type="submit" class="form__button">Войти</button>
       </div>
       <RouterLink class="form-text" to="/register">У вас нет аккаунта?<span class="form-text__link"> Зарегистрируйтесь</span></RouterLink>
     </form>

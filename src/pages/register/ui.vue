@@ -1,21 +1,70 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from "vue";
+import { supabase } from '@/supabase/init.js';
+// import { supabase } from '../supabase/init.js';
+// import router from 'vue';
+import { useRouter } from 'vue-router';
 import Slider from '@/widgets/Slider/ui.vue';
 
-  const email = ref(null);  
-  const login = ref(null);  
-  const password = ref(null);  
-  const confirmPassword = ref(null);  
-  const errorMsg = ref(null);  
+const router = useRouter();
+const email = ref("");  
+// const login = ref("");  
+const password = ref("");  
+// const confirmPassword = ref("");  
+// const errorMsg = ref(null);  
+
+  //register function
+
+const handleSignup = async () => {
+  try{
+    const {error} = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+      option: {
+        emailRedirectTo: 'http://localhost:5173/home'
+      }
+    })
+    if(error) throw error
+    router.push({ name: 'login' })
+
+  }catch(error){
+    alert(error.message)
+  }
+}
+
+
+  // const register = async () => {
+  //   if(password.value === confirmPassword.value){
+  //     try{
+  //       const { error } = await supabase.auth.signUp({
+  //         email: email.value,
+  //         password: password.value
+  //       });
+  //       if(error) throw error;
+  //       router.push({ name: 'Login' })
+  //     }
+  //     catch(error){
+  //       errorMsg.value = error.message;
+  //       setTimeout( () => {
+  //         errorMsg.value = null;
+  //       }, 5000);
+  //     }
+  //     return;
+  //   }
+
+  //   errorMsg.value = "Error: Password do not match";
+    
+  // }
+
 </script>
 
 <template>
   <div class="register">
     <!-- error handling -->
-    <!-- <div v-if="errorMsg" style="margin-bottom: 10px; padding: 4px; background: #e1e1e1;">
+    <div v-if="errorMsg" style="margin-bottom: 10px; padding: 4px; background: #e1e1e1;">
       <p style="color: red;">{{ errorMsg }}</p>
-    </div> -->
+    </div>
 
     <!-- слайдер -->
 
@@ -24,26 +73,28 @@ import Slider from '@/widgets/Slider/ui.vue';
     </div>
 
     <!-- register -->
-    <form class="form">
+    <form
+      @submit.prevent="handleSignup"
+      class="form">
       <h2 class="form__title">Регистрация</h2>
       <div class="form-input">
         <label for="email"></label>
         <input type="text" required id="email" v-model="email" placeholder="Почта">
       </div>
-      <div class="form-input">
+      <!-- <div class="form-input">
         <label for="login"></label>
         <input type="text" required id="login" v-model="login" placeholder="Логин">
-      </div>
+      </div> -->
       <div class="form-input">
         <label for="password"></label>
         <input type="password" required id="password" v-model="password" placeholder="Пароль">
       </div>
-      <div class="form-input">
+      <!-- <div class="form-input">
         <label for="confirmPassword"></label>
         <input type="password" required id="confirmPassword" v-model="confirmPassword" placeholder="Повторите пароль">
-      </div>
+      </div> -->
       <div>
-        <button class="form__button">Зарегистрироваться</button>
+        <button type="submit" class="form__button">Зарегистрироваться</button>
       </div>
       <RouterLink class="form-text" to="/login">У вас есть аккаунт?<span class="form-text__link"> Войдите</span></RouterLink>
     </form>
