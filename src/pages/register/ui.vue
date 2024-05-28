@@ -53,13 +53,6 @@ import Slider from '@/widgets/Slider/ui.vue';
 
 <style scoped lang="scss">
   .register{
-    // display: flex;
-    //   // flex-direction: column;
-    //   justify-content: center;
-    //   align-items: center;
-    //   text-align: center;
-
-
 
       display: flex;
       justify-content: center;  
@@ -116,7 +109,7 @@ import Slider from '@/widgets/Slider/ui.vue';
         font-size: 22px;
         color: #fff;
 
-        background-color: #796dff;
+        background-color: #F76E50;
 
         margin-top: 10px;
       }

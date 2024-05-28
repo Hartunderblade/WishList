@@ -3,6 +3,8 @@
 
 </script>
 
+
+<!-- active-clas="is-active" -->
 <template>
   <header class="header">
     <nav class="nav">
@@ -10,8 +12,12 @@
         <img src="@/app/img/Logo.svg" alt="">
       </div>
       <div class="nav-links">
-        <RouterLink class="nav-links__ref" to="/">Home</RouterLink>
-        <RouterLink class="nav-links__ref" to="/login">Login</RouterLink>
+        <RouterLink class="nav-links__ref" :to="{ name: 'home' }">Профиль</RouterLink>
+        <RouterLink class="nav-links__ref" :to="{ name: 'login' }">Друзья</RouterLink>
+        <RouterLink class="nav-links__ref" :to="{ name: 'login' }">Настройки</RouterLink>
+        <div>
+          <RouterLink class="nav-links__ref" :to="{ name: 'login' }">Выход</RouterLink>
+        </div>
       </div>
     </nav>
   </header>
@@ -25,6 +31,7 @@
       justify-content: space-between;
 
       margin: 30px 0;
+
 
       &-links{
         display: flex;

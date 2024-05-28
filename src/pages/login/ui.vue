@@ -17,9 +17,7 @@ const errorMsg = ref(null);
 
     <!-- сдайдер -->
 
-    <div>
-      <Slider/>
-    </div>
+    
 
     <!-- login -->
     <form class="form">
@@ -37,6 +35,9 @@ const errorMsg = ref(null);
       </div>
       <RouterLink class="form-text" to="/register">У вас нет аккаунта?<span class="form-text__link"> Зарегистрируйтесь</span></RouterLink>
     </form>
+    <div>
+      <Slider/>
+    </div>
     </section>
   </template>
   
@@ -47,7 +48,7 @@ const errorMsg = ref(null);
       align-items: center;
       text-align: center;
 
-      // column-gap: 30px;
+      column-gap: 30px;
 
       background-color: #fff;
 
