@@ -1,3 +1,5 @@
+https://www.youtube.com/watch?v=L36FgWGwlxU
+
 https://www.youtube.com/watch?v=SHluc-nS7fc&list=PL_euSNU_eLbfgYqSbg3LWTtq26cpXa8XF&index=106
 
 https://vueschool.io/articles/vuejs-tutorials/use-supabase-auth-with-vue-js-3/
