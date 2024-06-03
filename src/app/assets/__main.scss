@@ -4,13 +4,14 @@ $bg-body: #f3eeff;
 $color-button: #796dff;
 
 .container {
-  max-width: 1460px;
+  max-width: 1860px;
   margin: 0 auto;
   width: 100%;
 
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(14rem, 40%) 1fr;
+  // grid-template-columns: minmax(14rem, 40%) 1fr;
+  grid-template-columns: minmax(23rem, 80%) 1fr;
 }
 
 body {

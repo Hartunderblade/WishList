@@ -1,41 +1,39 @@
-{
-  "wishList": [
+[
     {
       "id": 1,
       "title": "8 марта",
       "description": "Тут может быть ваше описание",
-      "list": [
+      "item": [
         {
           "id": 1,
-          "img": "путь к картинке",
+          "img": "src/app/img/img-1.png",
           "title": "Тату",
           "subtitle": "http://tatusad.ru"
         },
         {
           "id": 2,
-          "img": "путь к картинке",
+          "img": "src/app/img/img-2.png",
           "title": "Подвеска",
           "subtitle": ""
         },
         {
           "id": 3,
-          "img": "Керамические тарелки",
-          "title": "Подвеска",
+          "img": "src/app/img/img-3.png",
+          "title": "Керамические тарелки",
           "subtitle": ""
         },
         {
           "id": 4,
-          "img": "Керамические тарелки",
+          "img": "src/app/img/img-4.png",
           "title": "Studio Gibli",
           "subtitle": "Виниловая пластинка"
         },
         {
           "id": 5,
-          "img": "Керамические тарелки",
+          "img": "src/app/img/img-5.png",
           "title": "",
           "subtitle": ""
         }
       ]
     }
-  ]
-}
+]

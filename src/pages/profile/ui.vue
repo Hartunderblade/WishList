@@ -1,7 +1,51 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import listData from '@/list.json';
+
+import List from '@/shared/list/ui.vue';
+import ModalCreate from '@/shared/modalCreate/ui.vue';
+
+const router = useRouter();
+const lists = ref(listData);
+
+const modalCreate = ref(false);
+
+
+///////
+
+const showModal = ref(false)
+
+const newNote = ref('');
+
+// const errorMessage = ref('');
+
+const notes = ref([]);
+
+function getRandomColor() {
+  return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+}
+
+const addNote = () => {
+  if(newNote.value.length < 10){
+    return errorMessage.value = 'note need to be 10 characters or more';
+  }
+  notes.value.push({
+    id: Math.floor(Math.random() * 1000000),
+    text:newNote.value,
+    date: new Date(),
+    bcColor: getRandomColor()
+  });
+  showModal.value = false;
+  newNote.value = "";
+  errorMessage.value = "";
+} 
+
+</script>
 
 <template>
   <div class="profile">
+    
     <div class="user">
       <div class="info">
         <img class="info__images" src="@/app/img/avatar-user.png" alt="Фото пользователя" />
@@ -27,40 +71,44 @@
           <p class="info-count__list">Листов 3</p>
         </div>
       </div>
-      <button class="user-create">
+      <button @click="modalCreate = true" class="user-create">
         <img src="@/app/img/create-list.svg" alt="Создание листа желания" />
       </button>
+      <!-- <ModalCreate v-if="modalCreate"/> -->
     </div>
-    <div class="list">
-      <div class="text">
-        <div class="text-info">
-          <h2 class="text-info__title"><span>.</span>8 марта</h2>
-          <p class="text-info__subtitle">Тут может быть ваше описание</p>
-        </div>
-        <div class="text-edit">
-          <img class="text-edit__img" src="@/app/img/edit.svg" alt="" />
-        </div>
-      </div>
-      <div class="cards">
-        <div class="card">
-          <img class="card__img" src="@/app/img/img-1.png" alt="Изображение желания" />
-          <div class="card-text">
-            <p class="card-text__title">Тату</p>
-            <p class="card-text__subtitle">http://tatusad.ru</p>
-          </div>
-          <div class="card-line"></div>
-          <div class="card-open">
-            <button class="card-open__open">Открыть</button>
-            <img class="card-open__delit" src="@/app/img/delit.svg" alt="Открыть" />
-          </div>
-        </div>
+    <List />
+    
+    <div v-if="showModal" class="overlay">
+    <div  class="modal">
+      <textarea v-model.trim="newNote" name="note" id="note" cols="30" rows="10"></textarea>
+      <button @click="addNote()">Add note</button>
+      <button  @click="showModal = false" class="close">close</button>
+    </div>
+  </div>
+  <div class="container">
+    <header>
+      <h1>Notes</h1>
+
+      <button @click="showModal = true" class="user-create">
+        <img src="@/app/img/create-list.svg" alt="Создание листа желания" />
+      </button>
+    </header>
+    
+    <div class="container-cards">
+      <div v-for="note in notes" :key="note.id" :style="{backgroundColor: note.bcColor}" class="card">
+        <p class="card__text">{{ note.text }}</p>
+        <p class="card__date">{{ note.date}}</p>
       </div>
     </div>
   </div>
+
+</div>
+
 </template>
 
 <style scoped lang="scss">
 .profile {
+  margin: 64px 0;
   .user {
     display: flex;
     align-items: center;
@@ -152,121 +200,104 @@
     }
   }
 
-  .list {
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 60px 80px;
 
-    border: 1px solid #e8e6ff;
 
-    .text {
+
+  .overlay{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.77);
+      z-index: 10;
+
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: center;
 
-      &-info {
+      .modal{
+        width: 750px;
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        position: relative;
         display: flex;
         flex-direction: column;
-        row-gap: 28px;
 
-        &__title {
-          font-weight: 600;
-          font-size: 28px;
-
-          span {
-            width: 20px;
-            height: 50px;
-            border-radius: 50px;
-            background-color: #f76e50;
-            box-shadow: 1px 1px 9px 0 #f76e50;
-            color: #f76e50;
-            margin-right: 10px;
-          }
-
-          // margin-right: 10px;
-        }
-      }
-
-      &__subtitle {
-        font-weight: 400;
-        font-size: 20px;
-      }
-
-      &-edit {
-        &__img {
-          width: 32px;
-          height: 32px;
-
+        button{
+          padding: 10px 20px;
+          font-size: 20px;
+          width: 100%;
+          background-color: blueviolet;
+          border: none;
+          color: white;
           cursor: pointer;
+          margin-top: 15px;
         }
+
+        p{
+          color: rgb(193, 15, 15);
+        }
+
+        .close{
+          background-color: rgb(193, 15, 15);
+          margin-top: 16px;
+        }
+
       }
     }
 
-    .cards {
-      .card {
-        border: 1px solid #f76e50;
-        border-radius: 20px;
-        padding: 20px 22px;
-        width: 244px;
-        height: 361px;
+    .container{
+      max-width: 1000px;
+      // padding: 10px;
+      margin: 0 auto;
 
-        &__img {
-          width: 200px;
-          height: 179px;
-          border-radius: 10px;
+      header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1{
+          font-weight: bold;
+          margin-bottom: 25px;
+          font-size: 64px;
         }
 
-        &-text {
+        button{
+          border: none;
+          padding: 10px;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+          background-color: #218cff;
+          border-radius: 100%;
+          color: white;
+          font-size: 20px;
+        }
+      }
+
+      &-cards{
+        display: flex;
+        flex-wrap: wrap;
+        .card{
+          width: 255px;
+          height: 255px;
+          padding: 10px;
+          border-radius: 10px;
           display: flex;
           flex-direction: column;
-          row-gap: 6px;
-
-          margin: 24px 0 0 0;
-
-          padding-bottom: 17px;
-
-          border-bottom: 1px solid #f76e50;
-
-          &__title {
-            font-weight: 500;
-            font-size: 18px;
-          }
-
-          &__subtitle {
-            font-weight: 500;
-            font-size: 16px;
-            color: #2e2e2e;
-          }
-        }
-
-        &-open {
-          display: flex;
-          align-items: center;
           justify-content: space-between;
+          margin-right: 20px;
+          margin-bottom: 20px;
 
-          margin-top: 17px;
-
-          &__open {
-            font-weight: 500;
-            font-size: 18px;
-            color: #fff;
-
-            border-radius: 10px;
-            padding: 10px 39px;
-            background: #f76e50;
-
-            cursor: pointer;
-          }
-
-          &__delit {
-            width: 20px;
-            height: 24px;
-
-            cursor: pointer;
+          &__date{
+            font-size: 12.5px;
+            font-weight: bold;
           }
         }
       }
+        
     }
-  }
+
+
 }
 </style>
