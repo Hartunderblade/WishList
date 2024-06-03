@@ -1,29 +1,40 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-  import { supabase } from '@/supabase/init.js';
-  import { useRouter } from 'vue-router';
+import NavBar from '@/widgets/navigation/ui.vue';
 
-  const router = useRouter();
-
-  async function signOut(){
-    const { error } = await supabase.auth.signOut();
-    router.push({ name: 'login' }) 
-  }
 </script>
 
 
 <template>
-  <section>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/home/profile">Профиль</RouterLink>
-    <RouterLink to="/home/about">О пользователе</RouterLink>
-    <button @click.prevent="signOut" type="submit" style="cursor: pointer;">Выход</button>
-    <RouterView/>
-  </section>
-   
-  </template>
+  <div class="container">
+    <header>
+      <nav>
+        <NavBar/>
+      </nav>
+    </header>
+    <main>
+      <RouterView/>
+    </main>
+  </div>
+</template>
   
 
-  <style lang="scss">
+<style lang="scss">
+.container{
+  header{
+    nav{
+  background-color: #fff;
+  border-radius: 0 40px 40px 0;
+  position: fixed;
+  width: 340px;
+  left: 0;
+  bottom: 0;
+  top: 0;
+
+  height: 100%;
+  padding: 30px 0 82px 58px;
+    }
+  }
+}
   
-  </style>
+</style>

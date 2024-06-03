@@ -3,7 +3,8 @@ import Home from '@/pages/home/ui.vue';
 import Login from '@/pages/login/ui.vue';
 import Register from '@/pages/register/ui.vue';
 import UserProfile from '@/pages/profile/ui.vue';
-import UserAbout from '@/pages/about/ui.vue';
+import UserFrends from '@/pages/frends/ui.vue';
+import UserSettings from '@/pages/settings/ui.vue';
 
 
 const router = createRouter({
@@ -15,15 +16,20 @@ const router = createRouter({
       component: Home,
       children: [
         {
-          path: 'profile',
+          path: '',
           name: 'Profile',
           component: UserProfile
         },
         {
-          path: 'about',
-          name: 'About',
-          component: UserAbout
+          path: 'frends',
+          name: 'Frends',
+          component: UserFrends
         },
+        {
+          path: 'settings',
+          name: 'Settings',
+          component: UserSettings
+        }
       ]
     },
     {
