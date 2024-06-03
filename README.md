@@ -1,6 +1,5 @@
 <h1>https://www.youtube.com/watch?v=3tF0fGkd4ho</h1>
 
-база
 <h1>https://supabase.com/dashboard/project/pdfvqtzauhmwxxeuvqyt/database/tables/28852</h1>
 
 # .
