@@ -1,51 +1,114 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import listData from '@/list.json';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import listData from '@/list.json'
 
-import List from '@/shared/list/ui.vue';
-import ModalCreate from '@/shared/modalCreate/ui.vue';
+import List from '@/shared/list/ui.vue'
+import ModalCreate from '@/shared/modalCreate/ui.vue'
 
-const router = useRouter();
-const lists = ref(listData);
+const router = useRouter()
+const lists = ref(listData)
 
-const modalCreate = ref(false);
-
+const modalCreate = ref(false)
 
 ///////
 
+// modal
+
 const showModal = ref(false)
 
-const newNote = ref('');
+const newTitle = ref('')
+const newDescription = ref('')
+const newImageUrl = ref('')
 
-// const errorMessage = ref('');
+const notes = ref([])
 
-const notes = ref([]);
+const errorMessage = ref('')
 
 function getRandomColor() {
-  return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+  return 'hsl(' + Math.random() * 360 + ', 100%, 75%)'
 }
 
 const addNote = () => {
-  if(newNote.value.length < 10){
-    return errorMessage.value = 'note need to be 10 characters or more';
+  if (newTitle.value.length < 10) {
+    return (errorMessage.value = 'note need to be 10 characters or more')
+  }
+  if (newDescription.value.length < 10) {
+    return (errorMessage.value = 'note need to be 10 characters or more')
   }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
-    text:newNote.value,
-    date: new Date(),
+    title: newTitle.value,
+    description: newDescription.value,
+    img: newImageUrl.value,
     bcColor: getRandomColor()
-  });
-  showModal.value = false;
-  newNote.value = "";
-  errorMessage.value = "";
-} 
+  })
+  showModal.value = false
+  newTitle.value = ''
+  newDescription.value = ''
+  newImageUrl.value = ''
+  errorMessage.value = ''
+}
 
+const onFileChange = (e) => {
+  const file = e.target.files[0]
+  const reader = new FileReader()
+
+  reader.onload = () => {
+    newImageUrl.value = reader.result
+  }
+
+  reader.readAsDataURL(file)
+}
+// modal
+
+// const errorMessage = ref('');
 </script>
 
 <template>
   <div class="profile">
-    
+    <div v-if="showModal" class="overlay">
+      <div class="modal">
+        <button @click="showModal = false" class="modal__close">
+          <img src="@/app/img/close.svg" alt="" />
+        </button>
+
+        <div class="note">
+          <div class="file">
+            <label @change="onFileChange" class="lable">
+              <img src="@/app/img/add-img.svg" alt="Загрузить картинку" />
+              <input type="file" />
+            </label>
+            <img
+              class="list__img"
+              style="width: 100px; height: 100px"
+              v-if="newImageUrl"
+              :src="newImageUrl"
+              alt="Uploaded Image"
+            />
+          </div>
+          <div class="note-input">
+            <textarea
+              v-model.trim="newTitle"
+              name="note"
+              id="note"
+              cols="32"
+              rows="6"
+              placeholder="Добавьте заголовок..."
+            ></textarea>
+            <textarea
+              v-model.trim="newDescription"
+              name="note"
+              id="note"
+              cols="32"
+              rows="7"
+              placeholder="Добавьте описание..."
+            ></textarea>
+            <button class="note-input__button" @click="addNote()">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="user">
       <div class="info">
         <img class="info__images" src="@/app/img/avatar-user.png" alt="Фото пользователя" />
@@ -71,44 +134,101 @@ const addNote = () => {
           <p class="info-count__list">Листов 3</p>
         </div>
       </div>
-      <button @click="modalCreate = true" class="user-create">
-        <img src="@/app/img/create-list.svg" alt="Создание листа желания" />
-      </button>
-      <!-- <ModalCreate v-if="modalCreate"/> -->
-    </div>
-    <List />
-    
-    <div v-if="showModal" class="overlay">
-    <div  class="modal">
-      <textarea v-model.trim="newNote" name="note" id="note" cols="30" rows="10"></textarea>
-      <button @click="addNote()">Add note</button>
-      <button  @click="showModal = false" class="close">close</button>
-    </div>
-  </div>
-  <div class="container">
-    <header>
-      <h1>Notes</h1>
-
+      <!-- <div v-if="showModal" class="overlay">
+        <div class="modal">
+          <textarea v-model.trim="newNote" name="note" id="note" cols="30" rows="10"></textarea>
+          <button @click="addNote()">Add note</button>
+          <button @click="showModal = false" class="close">close</button>
+        </div>
+      </div> -->
       <button @click="showModal = true" class="user-create">
         <img src="@/app/img/create-list.svg" alt="Создание листа желания" />
       </button>
-    </header>
-    
-    <div class="container-cards">
-      <div v-for="note in notes" :key="note.id" :style="{backgroundColor: note.bcColor}" class="card">
-        <p class="card__text">{{ note.text }}</p>
-        <p class="card__date">{{ note.date}}</p>
+    </div>
+
+    <div class="list">
+      <div
+        v-for="note in notes"
+        :key="note.id"
+        :style="{ backgroundColor: note.bcColor }"
+        class="card"
+      >
+        <img class="card__img" :src="note.img" alt="" />
+        <p class="card__text">{{ note.title }}</p>
+        <p class="card__text">{{ note.description }}</p>
       </div>
     </div>
   </div>
-
-</div>
-
 </template>
 
 <style scoped lang="scss">
 .profile {
   margin: 64px 0;
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 19;
+    opacity: 70;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .modal {
+      width: 862px;
+      height: 440px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 30px;
+      padding: 40px;
+      z-index: 20;
+
+      position: relative;
+
+      .note {
+        display: flex;
+        // justify-content: space-between;
+
+        .file {
+          border: 1px solid rgba(247, 110, 80, 0.5);
+
+          input[type='file'] {
+            outline: none;
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+          }
+        }
+
+        &-input {
+          display: flex;
+          flex-direction: column;
+          row-gap: 20px;
+
+          &__button {
+            background-color: #f76e50;
+            border-radius: 20px;
+            padding: 16px 136px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+            font-size: 22px;
+            text-align: center;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
   .user {
     display: flex;
     align-items: center;
@@ -198,106 +318,99 @@ const addNote = () => {
 
       cursor: pointer;
     }
+
+    // .overlay {
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 100%;
+    //   background-color: rgba(0, 0, 0, 0.77);
+    //   z-index: 20;
+
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+
+    //   .modal {
+    //     width: 750px;
+    //     background-color: #fff;
+    //     border-radius: 20px;
+    //     padding: 30px;
+    //     position: relative;
+    //     display: flex;
+    //     flex-direction: column;
+
+    //     button {
+    //       padding: 10px 20px;
+    //       font-size: 20px;
+    //       width: 100%;
+    //       background-color: blueviolet;
+    //       border: none;
+    //       color: white;
+    //       cursor: pointer;
+    //       margin-top: 15px;
+    //     }
+
+    //     p {
+    //       color: rgb(193, 15, 15);
+    //     }
+
+    //     .close {
+    //       background-color: rgb(193, 15, 15);
+    //       margin-top: 16px;
+    //     }
+    //   }
+    // }
   }
 
+  .container {
+    max-width: 1000px;
+    // padding: 10px;
+    margin: 0 auto;
 
-
-
-  .overlay{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.77);
-      z-index: 10;
-
+    header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
 
-      .modal{
-        width: 750px;
-        background-color: #fff;
-        border-radius: 20px;
-        padding: 30px;
-        position: relative;
+      h1 {
+        font-weight: bold;
+        margin-bottom: 25px;
+        font-size: 64px;
+      }
+
+      button {
+        border: none;
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        background-color: #218cff;
+        border-radius: 100%;
+        color: white;
+        font-size: 20px;
+      }
+    }
+
+    &-cards {
+      display: flex;
+      flex-wrap: wrap;
+      .card {
+        width: 255px;
+        height: 255px;
+        padding: 10px;
+        border-radius: 10px;
         display: flex;
         flex-direction: column;
-
-        button{
-          padding: 10px 20px;
-          font-size: 20px;
-          width: 100%;
-          background-color: blueviolet;
-          border: none;
-          color: white;
-          cursor: pointer;
-          margin-top: 15px;
-        }
-
-        p{
-          color: rgb(193, 15, 15);
-        }
-
-        .close{
-          background-color: rgb(193, 15, 15);
-          margin-top: 16px;
-        }
-
-      }
-    }
-
-    .container{
-      max-width: 1000px;
-      // padding: 10px;
-      margin: 0 auto;
-
-      header{
-        display: flex;
         justify-content: space-between;
-        align-items: center;
+        margin-right: 20px;
+        margin-bottom: 20px;
 
-        h1{
+        &__date {
+          font-size: 12.5px;
           font-weight: bold;
-          margin-bottom: 25px;
-          font-size: 64px;
-        }
-
-        button{
-          border: none;
-          padding: 10px;
-          width: 50px;
-          height: 50px;
-          cursor: pointer;
-          background-color: #218cff;
-          border-radius: 100%;
-          color: white;
-          font-size: 20px;
         }
       }
-
-      &-cards{
-        display: flex;
-        flex-wrap: wrap;
-        .card{
-          width: 255px;
-          height: 255px;
-          padding: 10px;
-          border-radius: 10px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          margin-right: 20px;
-          margin-bottom: 20px;
-
-          &__date{
-            font-size: 12.5px;
-            font-weight: bold;
-          }
-        }
-      }
-        
     }
-
-
+  }
 }
 </style>
