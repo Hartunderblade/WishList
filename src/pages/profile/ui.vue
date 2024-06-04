@@ -25,9 +25,9 @@ const notes = ref([])
 
 const errorMessage = ref('')
 
-function getRandomColor() {
-  return 'hsl(' + Math.random() * 360 + ', 100%, 75%)'
-}
+// function getRandomColor() {
+//   return 'hsl(' + Math.random() * 1000 + ', 100%, 70%)'
+// }
 
 const addNote = () => {
   if (newTitle.value.length < 10) {
@@ -40,8 +40,7 @@ const addNote = () => {
     id: Math.floor(Math.random() * 1000000),
     title: newTitle.value,
     description: newDescription.value,
-    img: newImageUrl.value,
-    bcColor: getRandomColor()
+    img: newImageUrl.value
   })
   showModal.value = false
   newTitle.value = ''
@@ -61,8 +60,6 @@ const onFileChange = (e) => {
   reader.readAsDataURL(file)
 }
 // modal
-
-// const errorMessage = ref('');
 </script>
 
 <template>
@@ -147,15 +144,19 @@ const onFileChange = (e) => {
     </div>
 
     <div class="list">
-      <div
-        v-for="note in notes"
-        :key="note.id"
-        :style="{ backgroundColor: note.bcColor }"
-        class="card"
-      >
+      <!-- <div class="list-title">
+        <div class="list-title__line"></div>
+        <h2 class="list-title__text">Мой лист</h2>
+      </div> -->
+      <div v-for="note in notes" :key="note.id" class="card">
         <img class="card__img" :src="note.img" alt="" />
-        <p class="card__text">{{ note.title }}</p>
-        <p class="card__text">{{ note.description }}</p>
+        <div class="card-text">
+          <p class="card-text__title">{{ note.title }}</p>
+          <p class="card-text__subtitle">{{ note.description }}</p>
+        </div>
+        <div class="card-open">
+          <button class="card-open__button">Удалить</button>
+        </div>
       </div>
     </div>
   </div>
@@ -318,48 +319,81 @@ const onFileChange = (e) => {
 
       cursor: pointer;
     }
+  }
 
-    // .overlay {
-    //   position: absolute;
-    //   width: 100%;
-    //   height: 100%;
-    //   background-color: rgba(0, 0, 0, 0.77);
-    //   z-index: 20;
+  .list {
+    display: flex;
+    gap: 20px;
 
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
+    &-title {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      &__line {
+        background-color: #f76e50;
+        box-shadow: 1px 0 23px 0 rgba(247, 110, 80, 0.7);
+        border-radius: 50px;
+        width: 10px;
+        height: 50px;
+      }
 
-    //   .modal {
-    //     width: 750px;
-    //     background-color: #fff;
-    //     border-radius: 20px;
-    //     padding: 30px;
-    //     position: relative;
-    //     display: flex;
-    //     flex-direction: column;
+    }
 
-    //     button {
-    //       padding: 10px 20px;
-    //       font-size: 20px;
-    //       width: 100%;
-    //       background-color: blueviolet;
-    //       border: none;
-    //       color: white;
-    //       cursor: pointer;
-    //       margin-top: 15px;
-    //     }
+    .card {
+      border: 1px solid #f76e50;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 20px 22px;
+      width: 244px;
+      height: 361px;
 
-    //     p {
-    //       color: rgb(193, 15, 15);
-    //     }
+      &__img {
+        border-radius: 10px;
+        width: 200px;
+        height: 179px;
+      }
 
-    //     .close {
-    //       background-color: rgb(193, 15, 15);
-    //       margin-top: 16px;
-    //     }
-    //   }
-    // }
+      &-text {
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+
+        margin-top: 20px;
+        &__title {
+          font-weight: 500;
+          font-size: 18px;
+        }
+
+        &__subtitle {
+          font-weight: 500;
+          font-size: 16px;
+          color: #2e2e2e;
+
+          border-bottom: 1px solid #f76e50;
+          padding-bottom: 18px;
+        }
+      }
+
+      &-open {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-top: 18px;
+
+        &__button {
+          font-weight: 500;
+          font-size: 18px;
+          color: #fff;
+
+          border-radius: 10px;
+          padding: 10px 39px;
+          background: #f76e50;
+
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .container {
