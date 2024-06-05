@@ -53,6 +53,7 @@ const addNote = () => {
   isloading.value = false;
 }
 
+
 const onFileChange = (e) => {
   const file = e.target.files[0]
   const reader = new FileReader()
@@ -63,6 +64,7 @@ const onFileChange = (e) => {
 
   reader.readAsDataURL(file)
 }
+
 
 const delitNote = (index) => {
   notes.value.splice(index, 1)
