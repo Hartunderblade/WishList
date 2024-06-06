@@ -5,7 +5,7 @@ import Register from '@/pages/register/ui.vue';
 import UserProfile from '@/pages/profile/ui.vue';
 import UserFrends from '@/pages/frends/ui.vue';
 import UserSettings from '@/pages/settings/ui.vue';
-
+import AboutFriends from '@/shared/aboutFried/ui.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +24,11 @@ const router = createRouter({
           path: 'frends',
           name: 'Frends',
           component: UserFrends
+        },
+        {
+          path: '/frend/:id',
+          name: 'frend',
+          component: AboutFriends
         },
         {
           path: 'settings',

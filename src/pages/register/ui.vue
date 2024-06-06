@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from "vue";
 import { supabase } from '@/supabase/init.js';
@@ -9,9 +8,9 @@ import Slider from '@/widgets/Slider/ui.vue';
 
 const router = useRouter();
 const email = ref("");  
-// const login = ref("");  
+const login = ref("");  
 const password = ref("");  
-// const confirmPassword = ref("");  
+const confirmPassword = ref("");  
 // const errorMsg = ref(null);  
 
   //register function
@@ -81,18 +80,18 @@ const handleSignup = async () => {
         <label for="email"></label>
         <input type="text" required id="email" v-model="email" placeholder="Почта">
       </div>
-      <!-- <div class="form-input">
+      <div class="form-input">
         <label for="login"></label>
         <input type="text" required id="login" v-model="login" placeholder="Логин">
-      </div> -->
+      </div>
       <div class="form-input">
         <label for="password"></label>
         <input type="password" required id="password" v-model="password" placeholder="Пароль">
       </div>
-      <!-- <div class="form-input">
+      <div class="form-input">
         <label for="confirmPassword"></label>
         <input type="password" required id="confirmPassword" v-model="confirmPassword" placeholder="Повторите пароль">
-      </div> -->
+      </div>
       <div>
         <button type="submit" class="form__button">Зарегистрироваться</button>
       </div>

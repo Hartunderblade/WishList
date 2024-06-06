@@ -9,7 +9,7 @@ defineProps({
 <div class="friend">
     <img class="friend__img" src="@/app/img/avatar.png" />
     <h3 class="friend__title">{{ friend.name }}</h3>
-    <p class="friend__sabtitle">{{ friend.yiear }}</p>
+    <p class="friend__sabtitle">{{ friend.year }} лет</p>
 </div>
 
 </template>
@@ -19,6 +19,11 @@ defineProps({
     border-radius: 20px;
     padding: 40px;
 
+    text-align: center;
+    width: 280px;
+
+    cursor: pointer;
+
     &__img{
         width: 100px;
         height: 100px;
@@ -27,13 +32,15 @@ defineProps({
 
     &__title{
         font-weight: 400;
-        font-size: 20px;
+        font-size: 18px;
+
+        margin: 20px 0 10px 0;
     }
 
     &__sabtitle{
-        // font-weight: 400;
-        // font-size: 16px;
-        // // color: #616161;
+        font-weight: 400;
+        font-size: 16px;
+        color: #616161;
     }
 }
 

@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from 'vue';
+import { routerViewLocationKey, useRouter } from 'vue-router';
 import FriendCard from '@/shared/friend/ui.vue';
 
 import friendsData from '@/friends.json';
 
 const friends = ref(friendsData);
+
+const router = ref(friendsData)
+
 </script>
 
 <template>
@@ -15,7 +19,7 @@ const friends = ref(friendsData);
         <h1 class="all-title__title">Все друзья</h1>
       </div>
       <div class="all-frends">
-        <FriendCard v-for="friend in friends" :key="friend.id" :friend="friend" />
+        <FriendCard v-for="friend in friends" :key="friend.id" :friend="friend" @click="router.push(`/friend/${friend.id}`)" />
       </div>
       
     </div>
@@ -26,9 +30,10 @@ const friends = ref(friendsData);
 .frends{
   .all{
     background-color: #fff;
-    width: 1026px;
+    width: 1020px;
     padding: 60px;
     border-radius: 20px;
+
 
     &-title{
       display: flex;
