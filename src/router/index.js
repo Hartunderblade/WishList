@@ -7,6 +7,8 @@ import UserFrends from '@/pages/frends/ui.vue';
 import UserSettings from '@/pages/settings/ui.vue';
 import AboutFriends from '@/shared/aboutFried/ui.vue';
 
+import { isAuthenticated } from '@/store/index.js';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -14,11 +16,17 @@ const router = createRouter({
       path: '/home',
       name: 'Home',
       component: Home,
+      meta: {
+        needAuth: true,
+      },
       children: [
         {
           path: '',
           name: 'Profile',
-          component: UserProfile
+          component: UserProfile,
+          meta: {
+            isPersonalPage: true,
+          }
         },
         {
           path: 'frends',
@@ -26,8 +34,8 @@ const router = createRouter({
           component: UserFrends
         },
         {
-          path: '/frend/:id',
-          name: 'frend',
+          path: 'frend/:id',
+          name: 'Frend',
           component: AboutFriends
         },
         {
@@ -49,5 +57,11 @@ const router = createRouter({
     }
   ]
 })
+
+// router.beforeEach( (to, from) => {
+//   if(to.meta.needAuth && !isAuthenticated.value){
+//     return { name: 'Login' }
+//   }
+// })
 
 export default router

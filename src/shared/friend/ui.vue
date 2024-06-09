@@ -7,7 +7,7 @@ defineProps({
 <template>
 
 <div class="friend">
-    <img class="friend__img" src="@/app/img/avatar.png" />
+    <img class="friend__img" :src="friend.avatar" />
     <h3 class="friend__title">{{ friend.name }}</h3>
     <p class="friend__sabtitle">{{ friend.year }} лет</p>
 </div>

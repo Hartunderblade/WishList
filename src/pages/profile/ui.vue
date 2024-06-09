@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import listData from '@/list.json'
 
@@ -13,6 +13,7 @@ const modalCreate = ref(false)
 
 const isloading = ref(true);
 
+
 ///////
 
 // modal
@@ -25,31 +26,17 @@ const newImageUrl = ref('');
 
 const notes = ref([]);
 
-// const errorMessage = ref('')
-
-// function getRandomColor() {
-//   return 'hsl(' + Math.random() * 1000 + ', 100%, 70%)';
-// }
-
 const addNote = () => {
-  // if (newTitle.value.length < 10) {
-  //   return (errorMessage.value = 'note need to be 10 characters or more')
-  // }
-  // if (newDescription.value.length < 10) {
-  //   return (errorMessage.value = 'note need to be 10 characters or more')
-  // }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
     title: newTitle.value,
     description: newDescription.value,
     img: newImageUrl.value,
-    // bcColor: getRandomColor()
   })
   showModal.value = false;
   newTitle.value = '';
   newDescription.value = '';
   newImageUrl.value = '';
-  // errorMessage.value = ''
   isloading.value = false;
 }
 
@@ -106,7 +93,7 @@ const delitNote = (index) => {
           <div class="blok-contact">
             <div class="">
               <span>Пол</span>
-              <p>Женский</p>
+              <p>Мужской</p>
             </div>
             <div class="">
               <span>Дата рождения</span>

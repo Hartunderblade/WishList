@@ -3,56 +3,80 @@
         "id": 1,
         "name": "Иванова Анна",
         "year": 20,
-        "avatar": "путь к картинке",
-        "text": "tedgdxt"
+        "avatar": "/src/app/img/img-1.svg",
+        "gender": "Женский",
+        "birthday": "Не указано",
+        "social": "Не указано",
+        "list": [
+            {
+                "id": 1,
+                "img": "https://i.pinimg.com/564x/e2/0a/ab/e20aab8ce8d0851a559414b8bb82dbed.jpg",
+                "title": "На день рождение",
+                "subtitle": "Подарок на моё 21 летие"
+            },
+            {
+                "id": 2,
+                "img": "https://cdn1.ozone.ru/s3/multimedia-5/6073608233.jpg",
+                "title": "На день рождение",
+                "subtitle": "Пластинка"
+            },
+            {
+                "id": 3,
+                "img": "https://ae01.alicdn.com/kf/HTB1sIvdOFXXXXbOXFXXq6xXFXXXm.jpg",
+                "title": "На день рождение",
+                "subtitle": ""
+            }
+        ],
+        "frends": 10,
+        "lists": 3
     },
     {
         "id": 2,
         "name": "Суворова Виктория",
         "year": 19,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-2.svg",
         "text": "text"
     },
     {
         "id": 3,
         "name": "Ермолаева Елизавета",
         "year": 18,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-3.svg",
         "text": "tedsdsfxt"
     },
     {   
         "id": 4,
         "name": "Волков Иван",
         "year": 14,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-4.svg",
         "text": "tedfgdgxt"
     },
     {
         "id": 5,
         "name": "Шубин Павел",
         "year": 30,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-5.svg",
         "text": "tefxt"
     },
     {
         "id": 6,
         "name": "Журавлева Ксения",
         "year": 27,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-6.svg",
         "text": "texfgdgdt"
     },
     {
         "id": 7,
         "name": "Мартынов Михаил",
         "year": 20,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-7.svg",
         "text": "tefdgdfxt"
     },
     {
         "id": 8,
         "name": "Соколова Вероника",
         "year": 16,
-        "avatar": "путь к картинке",
+        "avatar": "/src/app/img/img-8.svg",
         "text": "text"
     }
 ]
