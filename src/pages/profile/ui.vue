@@ -2,12 +2,14 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import listData from '@/list.json'
+import friendsData from '@/friends.json'
 
 import List from '@/shared/list/ui.vue'
 import ModalCreate from '@/shared/modalCreate/ui.vue'
 
 const router = useRouter()
 const lists = ref(listData)
+const friends = ref(friendsData)
 
 const modalCreate = ref(false)
 
@@ -106,7 +108,7 @@ const delitNote = (index) => {
           </div>
         </div>
         <div class="info-count">
-          <p class="info-count__frends">Друзей 10</p>
+          <p class="info-count__frends">Друзей {{ friends.length }}</p>
           <p class="info-count__list">Желаний {{ notes.length }}</p>
         </div>
       </div>

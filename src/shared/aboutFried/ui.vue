@@ -18,9 +18,9 @@ onBeforeMount(() => {
 
 const buttonColor = ref('blue');
 
-    const removeFriend = () => {
-      buttonColor.value = 'red';
-    }
+const removeFriend = () => {
+    buttonColor.value = 'red';
+}
 
 </script>
 
@@ -55,7 +55,7 @@ const buttonColor = ref('blue');
             </div>
 
             <div class="info-condition">
-                <button type="submit" :class="{ add: !cliked, delit : cliked }" @click="cliked = !cliked"></button>
+                <button type="submit" :class="{ add: !cliked, delit: cliked }" @click="cliked = !cliked"></button>
             </div>
         </div>
         <div v-else>
@@ -67,11 +67,17 @@ const buttonColor = ref('blue');
                 <h2 class="list-title__text">Лист</h2>
             </div>
 
-            <div  class="list-items">
+            <div class="list-items">
                 <div v-for="item in friend.list" :key="item.id" class="item">
                     <img :src="item.img" alt="">
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.subtitle }}</p>
+                    <div class="item-text">
+                        <h3 class="item-text__title">{{ item.title }}</h3>
+                        <p class="item-text__subtitle">{{ item.subtitle }}</p>
+                    </div>
+                    <div class="item-use">
+                        <button class="item-use__open">Открыть</button>
+                        <input type="checkbox">
+                    </div>
                 </div>
             </div>
 
@@ -153,21 +159,21 @@ const buttonColor = ref('blue');
             }
         }
 
-        &-condition{
-        .add{
-            width: 257px;   
-            height:72px;
-       background-image: url(@/app/img/add-friend.svg);
-       background-repeat: no-repeat;
-        }
+        &-condition {
+            .add {
+                width: 257px;
+                height: 72px;
+                background-image: url(@/app/img/add-friend.svg);
+                background-repeat: no-repeat;
+            }
 
-        .delit{
-            width: 257px;   
-       height:72px;
-    background-image: url(@/app/img/delit-friend.svg);
-    background-repeat: no-repeat;
+            .delit {
+                width: 257px;
+                height: 72px;
+                background-image: url(@/app/img/delit-friend.svg);
+                background-repeat: no-repeat;
+            }
         }
-    }
     }
 
     .list {
@@ -198,20 +204,20 @@ const buttonColor = ref('blue');
             }
         }
 
-        &-items{
+        &-items {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
 
             margin-top: 40px;
 
-            .item{
+            .item {
                 border: 1px solid #f76e50;
                 border-radius: 20px;
                 padding: 20px 22px;
                 background-color: #fff;
 
-                img{
+                img {
                     border-radius: 10px;
                     width: 200px;
                     height: 179px;
@@ -219,22 +225,45 @@ const buttonColor = ref('blue');
                     margin-bottom: 24px;
                 }
 
-                h3{
-                    font-weight: 500;
-                    font-size: 18px;
+                &-text {
+                    &__title {
+                        font-weight: 500;
+                        font-size: 18px;
 
-                    margin-bottom: 12px;
+                        margin-bottom: 12px;
+                    }
+
+                    &__subtitle {
+                        font-weight: 500;
+                        font-size: 16px;
+                        color: #2e2e2e;
+                    }
                 }
 
-                p{
-                    font-weight: 500;
-                    font-size: 16px;
-                    color: #2e2e2e;
+                &-use {
+                    &__open {
+                        background-color: #796DFF;
+                        border-radius: 10px;
+                        padding: 10px 39px;
+
+                        font-weight: 500;
+                        font-size: 18px;
+                        color: #fff;
+
+                    }
+
+                    input{
+                    }
+
                 }
+
+
+
+
             }
         }
     }
 
-    
+
 }
 </style>
