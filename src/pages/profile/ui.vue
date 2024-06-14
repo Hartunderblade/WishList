@@ -422,6 +422,8 @@ const delitNote = (index) => {
           &__title {
             font-weight: 500;
             font-size: 18px;
+
+            // width: 240px;
           }
 
           &__subtitle {
@@ -431,6 +433,8 @@ const delitNote = (index) => {
 
             border-bottom: 1px solid #f76e50;
             padding-bottom: 18px;
+
+            // width: 240px;
           }
         }
 

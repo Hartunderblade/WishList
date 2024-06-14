@@ -1,13 +1,29 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const days = Array.from({ length: 31 }, (_, index) => index + 1);
-const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-const years = Array.from({ length: 100 }, (_, index) => new Date().getFullYear() - index);
+const route = useRouter();
 
-const selectedDay = ref(1);
-const selectedMonth = ref(1);
-const selectedYear = ref(new Date().getFullYear());
+const days = Array.from({ length: 31 }, (_, index) => index + 1)
+const months = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь'
+]
+const years = Array.from({ length: 100 }, (_, index) => new Date().getFullYear() - index)
+
+const selectedDay = ref(1)
+const selectedMonth = ref(1)
+const selectedYear = ref(new Date().getFullYear())
 </script>
 
 <template>
@@ -20,16 +36,18 @@ const selectedYear = ref(new Date().getFullYear());
       <div class="profile">
         <div class="header">
           <img class="header__images" src="@/app/img/avatar-user.png" alt="Фото пользователя" />
-          <button class="header__update"><img src="@/app/img/updateAvatar-icon.svg" alt=""></button>
+          <button class="header__update">
+            <img src="@/app/img/updateAvatar-icon.svg" alt="" />
+          </button>
         </div>
         <div class="input">
           <div class="input-name">
             <label for="">Имя:</label>
-            <input type="text" name="" id="" placeholder="Введите имя">
+            <input type="text" name="" id="" placeholder="Введите имя" />
           </div>
           <div class="input-surname">
             <label for="">Фамилия:</label>
-            <input type="text" name="" id="" placeholder="Введите фамилию">
+            <input type="text" name="" id="" placeholder="Введите фамилию" />
           </div>
           <div class="input-gender">
             <label for="">Пол:</label>
@@ -46,13 +64,14 @@ const selectedYear = ref(new Date().getFullYear());
               </select>
 
               <select id="" v-model="selectedMonth">
-                <option v-for="(month, index) in months" :key="index" :value="index + 1">{{ month }}</option>
+                <option v-for="(month, index) in months" :key="index" :value="index + 1">
+                  {{ month }}
+                </option>
               </select>
               <select id="" v-model="selectedYear">
                 <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
               </select>
             </div>
-
           </div>
 
           <div class="input-social">
@@ -64,17 +83,14 @@ const selectedYear = ref(new Date().getFullYear());
       <button class="profile__save">Сохранить</button>
     </div>
 
-    <div class="delit">
+    <div @click="route.push({ name: 'Register' })" class="delit">
       <button class="delit__account">Удалить аккаунт</button>
     </div>
-
-
   </div>
 </template>
 
 <style scoped lang="scss">
 .settings {
-
   margin: 84px 0;
 
   .account {
@@ -105,26 +121,25 @@ const selectedYear = ref(new Date().getFullYear());
   }
 
   .profile {
+    margin-top: 28px;
     .header {
-position: relative;
-      &__images{
-width: 102px;
-height: 102px;
-border-radius: 100%;
-border: 3px solid #988FFF;
-padding: 4px;
+      position: relative;
+      &__images {
+        width: 102px;
+        height: 102px;
+        border-radius: 100%;
+        border: 3px solid #988fff;
+        padding: 4px;
       }
 
-      &__update{
+      &__update {
         position: absolute;
         bottom: 10px;
         left: 64px;
         border-radius: 100%;
         width: 24px;
         height: 24px;
-        
       }
-
     }
 
     .input {
@@ -151,7 +166,6 @@ padding: 4px;
           width: 232px;
           font-size: 16px;
         }
-
       }
 
       &-gender {
@@ -187,7 +201,6 @@ padding: 4px;
 
           font-weight: 400;
           font-size: 16px;
-
         }
       }
 
@@ -205,38 +218,33 @@ padding: 4px;
           width: 232px;
         }
       }
-
     }
 
-    &__save{
+    &__save {
       background: #f76e50;
       border-radius: 20px;
-padding: 20px 46px;
+      padding: 20px 46px;
 
-font-weight: 600;
-font-size: 20px;
-color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      color: #fff;
     }
-
-
-
   }
 
-  .delit{
+  .delit {
     background-color: #fff;
     border: 1px solid rgba(121, 109, 255, 0.8);
-border-radius: 0 0 20px 20px;
-padding: 16px 0;
-text-align: center;
-margin-top: 30px;
+    border-radius: 0 0 20px 20px;
+    padding: 16px 0;
+    text-align: center;
+    margin-top: 18px;
 
-cursor: pointer;
+    cursor: pointer;
 
-&__account{
-  font-weight: 500;
-font-size: 18px;
-}
+    &__account {
+      font-weight: 500;
+      font-size: 18px;
+    }
   }
-
 }
 </style>
